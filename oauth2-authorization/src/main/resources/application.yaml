@@ -1,0 +1,53 @@
+
+spring:
+  application:
+    name: oauth2-authorization
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/haimi_user?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&autoReconnect=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      read-only: false
+      connection-timeout: 30000
+      idle-timeout: 600000
+      validation-timeout: 3000
+      max-lifetime: 180000
+      login-timeout: 5
+      maximum-pool-size: 60
+      minimum-idle: 10
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+management:
+  endpoint:
+    health:
+      enabled: true
+logging:
+  file:
+    path: /logs/oauth2Authorizations/oauth2Authorization.log
+  level:
+    org.springframework.web: INFO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: oauth2-client1
+  datasource:
+    url: jdbc:mysql://192.168.1.159:3306/camer_edit_qimi?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&autoReconnect=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      read-only: false
+      connection-timeout: 30000
+      idle-timeout: 600000
+      validation-timeout: 3000
+      max-lifetime: 180000
+      login-timeout: 5
+      maximum-pool-size: 60
+      minimum-idle: 10
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+server:
+  port: 8082
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    session:
+      cookie:
+        name: CLIENT2SESSION
+management:
+  endpoint:
+    health:
+      enabled: true
+logging:
+  file:
+    path: /logs/oauth2Client1s/oauth2-client1.log
+  level:
+    org.springframework.web: INFO
+
+feign:
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        loggerLevel: full
+        requestInterceptors:
+          - com.jiayaxing.oauth2Resource.bean.TokenRelayRequestInterceptor
+
+#security:
+#  oauth2:
+#    client:
+#      user-authorization-uri: http://127.0.0.1:8080/oauth/authorize
+#      access-token-uri: http://127.0.0.1:8080/oauth/token
+#      client-id: c1
+#      client-secret: secret
+#    resource:
+#      jwt:
+#        key-uri: http://127.0.0.1:8080/oauth/token_key
+#      id: res1
+#    sso:
+#      login-path: /login
+
